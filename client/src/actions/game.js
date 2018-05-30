@@ -1,21 +1,9 @@
-import { CREATE_GAME, MOVE } from "./types";
-import { fillBoard } from "../lib/game";
+import { CREATE_BOARD } from "./types";
+import { createEmptyBoard } from "../lib/game";
 
-export const createGame = (rows = 6) => {
-  const [board, sheep] = fillBoard(rows);
+export const createBoard = () => {
   return {
-    type: CREATE_GAME,
-    payload: {
-      board,
-      sheep
-    }
+    type: CREATE_BOARD,
+    payload: createEmptyBoard()
   };
 };
-
-export const move = (row, col) => ({
-  type: MOVE,
-  payload: {
-    row,
-    col
-  }
-});

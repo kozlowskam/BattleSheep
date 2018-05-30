@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { move } from "../actions/game";
 
 export class Button extends PureComponent {
   static propTypes = {
@@ -13,12 +12,6 @@ export class Button extends PureComponent {
     scored: PropTypes.bool,
     empty: PropTypes.bool,
     discovered: PropTypes.bool
-  };
-
-  handleClick = () => {
-    const { x, y, makeMove, sheep, discovered, empty, scored } = this.props;
-    if (sheep) return;
-    makeMove(y, x);
   };
 
   classNames() {
@@ -43,4 +36,4 @@ const mapStateToProps = ({ sheep }, { x, y }) => ({
   sheep: sheep.filter(l => l[0] === y && l[1] === x).length > 0
 });
 
-export default connect(mapStateToProps, { makeMove: move })(Button);
+export default connect(mapStateToProps, {})(Button);

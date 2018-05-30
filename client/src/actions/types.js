@@ -1,2 +1,2 @@
-export const CREATE_GAME = "CREATE_GAME";
+export const CREATE_BOARD = "CREATE_BOARD";
 export const MOVE = "MOVE";
