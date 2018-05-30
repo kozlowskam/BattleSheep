@@ -37,11 +37,23 @@ export default class GameController {
     return game;
   }*/
 
-  @Put("/games/:id")
+  /*@Put("/games/:id")
   async updateGame(@Param("id") id: number, @Body() update: Partial<Game>) {
     const game = await Game.findOne({ id: id });
     if (!game) throw new NotFoundError("game not found");
     game.board = shotHits(game.board, [0, 2]);
     return Game.merge(game, update).save();
+  }*/
+
+  @Put("/games/:id")
+  async updateGame(@Param("id") id: number, @Body() update: { board: Board }) {
+    let game = await Game.findOne({ id: id });
+    if (!game) throw new NotFoundError("Game not found!");
+
+    game.board = placeSheep(game.board, sheepShapes["fatSheep"], [0, 0]);
+
+    Game.merge(game, update);
+    game.save();
+    return game;
   }
 }

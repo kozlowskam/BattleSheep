@@ -38,6 +38,7 @@ export function placeSheep(board, sheepshape, startcell) {
     cell =>
       (board[startcell[0] + cell[0]][startcell[1] + cell[1]].occupied = true)
   );
+  return board;
 }
 
 export function shotHits(board, shotOnCell) {
