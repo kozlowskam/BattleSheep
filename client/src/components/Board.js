@@ -7,34 +7,45 @@ import "./Board.css";
 import { createEmptyBoard } from "../lib/game";
 
 export class Board extends PureComponent {
-  /*static propTypes = {
-    board: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired
-  };*/
 
-  renderCell(i) {
-    const cells = this.props;
+  
 
-    return <Cell />;
-  }
-
-  renderRow(i) {
-    var arr = [];
-    for (var x = 0; x < 10; x++) {
-      arr.push(this.renderCell(i + x));
+  createEmptyBoard = () =>  {
+      var boardsize = 10
+      var board = [];
+      for (var i = 0; i < boardsize; i++) {
+        board.push([]);
+        for ( var j = 0; j < boardsize; j++) {
+          board[i].push({
+            occupied: false,
+            discovered: false
+          });
+        }
+      }
+      return board;
     }
-    return <div> {arr} </div>;
-  }
+
 
   render() {
-    const boardsize = 10;
-    var Board = [];
-    for (var i = 0; i < boardsize; i++) {
-      Board.push(this.renderRow(i));
-    }
 
-    return Board;
-    return <div>{Board}</div>;
+    createEmptyBoard().forEach(function(row){
+      row.forEach(function(cell) {
+
+      })
+      return <Cell/>
+    });
+
   }
 }
+//     const boardsize = 10;
+//     var Board = [];
+//     for (var i = 0; i < boardsize; i++) {
+//       Board.push(this.renderRow(i));
+//     }
+
+//     return Board;
+//     return <div>{Board}</div>;
+//   }
+// }
 
 export default connect(null, createEmptyBoard)(Board);
