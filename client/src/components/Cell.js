@@ -5,7 +5,7 @@ import Button from "./Button.css";
 export default function Cell(props) {
   return (
     <div style={{ display: "inline-block" }}>
-      <button class="Button" />
+      <button class="Button">{props.index}</button>
     </div>
   );
 }

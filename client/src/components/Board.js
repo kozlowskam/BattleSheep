@@ -8,44 +8,32 @@ import { createEmptyBoard } from "../lib/game";
 
 export class Board extends PureComponent {
 
-  
-
-  createEmptyBoard = () =>  {
+  createEmptyBoard() {
       var boardsize = 10
       var board = [];
+      var UIBoard = []
       for (var i = 0; i < boardsize; i++) {
         board.push([]);
+        UIBoard.push([<div/>]);
+
         for ( var j = 0; j < boardsize; j++) {
           board[i].push({
             occupied: false,
             discovered: false
           });
+          UIBoard.push(<Cell index={[i,j]} />)
         }
       }
-      return board;
+      return UIBoard
     }
-
-
+ 
   render() {
-
-    createEmptyBoard().forEach(function(row){
-      row.forEach(function(cell) {
-
-      })
-      return <Cell/>
-    });
-
+    return (<div>{this.createEmptyBoard()}</div>
+      
+    )
   }
 }
-//     const boardsize = 10;
-//     var Board = [];
-//     for (var i = 0; i < boardsize; i++) {
-//       Board.push(this.renderRow(i));
-//     }
 
-//     return Board;
-//     return <div>{Board}</div>;
-//   }
-// }
 
 export default connect(null, createEmptyBoard)(Board);
+ 
