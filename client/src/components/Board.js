@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-// import Button from "./Button";
+
 import Cell from "./Cell";
 import "./Board.css";
 import { createRandomBoard } from "../lib/game";
