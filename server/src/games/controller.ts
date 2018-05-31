@@ -14,14 +14,14 @@ import {
   Patch
 } from "routing-controllers";
 import Game, { Board } from "./entities";
-import { createEmptyBoard, placeSheep, sheepShapes, shotHits } from "./logic";
+import { createRandomBoard, placeSheep, sheepShapes, shotHits } from "./logic";
 
 @JsonController()
 export default class GameController {
   @Post("/games")
   @HttpCode(201)
   async createGame(@Body() game: { board: Board }) {
-    game.board = createEmptyBoard();
+    game.board = createRandomBoard();
     return Game.create(game).save();
   }
 

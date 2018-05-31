@@ -24,22 +24,45 @@ export const sheepShapes = {
   "2Sheep": [[0, 0], [0, 1]],
   "3Sheep": [[0, 0], [0, 1], [0, 2]],
   zSheep: [[0, 0], [0, 1], [1, 1], [1, 2]],
-  "4Sheep": [[0, 0], [0, 1], [0, 2], [0, 3]],
   lSheep: [[0, 0], [0, 1], [1, 1]],
   bigZsheep: [[0, 0], [1, 0], [1, 1], [1, 2], [2, 2]],
   fatSheep: [[0, 0], [0, 1], [1, 0], [1, 1]]
 };
 
+export const possibleLocList = [
+  [[3, 7], [6, 3], [4, 3], [3, 2], [4, 3], [5, 2], [0, 6]],
+  [[0, 5], [2, 5], [4, 4], [3, 5], [5, 1], [6, 0], [1, 6]],
+  [[7, 4], [5, 2], [4, 0], [3, 5], [1, 6], [0, 5], [6, 6]],
+  [[6, 7], [2, 3], [0, 0], [3, 4], [5, 4], [6, 1], [1, 4]],
+  [[6, 0], [1, 3], [2, 5], [4, 0], [6, 3], [2, 5], [0, 0]]
+];
+
+export function createRandomBoard() {
+  let board = createEmptyBoard();
+  var randLocList =
+    possibleLocList[Math.floor(Math.random() * possibleLocList.length)];
+  randLocList.forEach(function(location) {
+    console.log(location);
+    for (var shape in sheepShapes) {
+      //console.log(shape);
+      placeSheep(board, sheepShapes[shape], location);
+    }
+  });
+  console.log(board);
+  return board;
+}
+
 export function placeSheep(board, sheepshape, startcell) {
   // places the sheep on the board.
   // takes sheepshape (sheepShape['fatSheep']) and starting cell ([0,0])
   // as arguments
-  sheepshape.forEach(
-    cell =>
-      (board[startcell[0] + cell[0]][startcell[1] + cell[1]].occupied = true)
-  );
+  sheepshape.forEach(function(cell) {
+    board[startcell[0] + cell[0]][startcell[1] + cell[1]].occupied = true;
+  });
   return board;
 }
+
+createRandomBoard();
 
 export function shotHits(board, shotOnCell) {
   // set the cell.discovered on which the shot was fired to True,
