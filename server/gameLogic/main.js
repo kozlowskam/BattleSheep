@@ -33,16 +33,16 @@ const sheepShapes = {
     'lSheep' : [[0,0], [0,1], [1,1]],
     'bigZsheep' : [[0,0], [1,0], [1,1], [1,2], [2,2]],
     'fatSheep' : [[0,0], [0,1], [1,0], [1,1]]
-} 
+}
 
 function placeSheep(board, sheepshape, startcell) {
-    // places the sheep on the board. 
+    // places the sheep on the board.
     // takes sheepshape (sheepShape['fatSheep']) and starting cell ([0,0])
     // as arguments
     sheepshape
         .forEach(cell => board[startcell[0] + cell[0]]
             [startcell[1] + cell[1]].occupied = true )
-} 
+}
 
 function shotHits(board, shotOnCell) {
     // set the cell.discovered on which the shot was fired to True,
@@ -50,6 +50,9 @@ function shotHits(board, shotOnCell) {
     // takes the playing board and targeted cell as arguments
     const cell = board[shotOnCell[0]][shotOnCell[1]]
     cell.discovered = true
+
+
+    
     if (cell.occupied === true) {
         console.log('shot hit!')
         return true
@@ -63,10 +66,12 @@ function shotHits(board, shotOnCell) {
 
 
 
-var board1 = createEmptyBoard() 
+var board1 = createEmptyBoard()
 
-placeSheep(board1, sheepShapes['2Sheep'], [0,0])
+placeSheep(board1, sheepShapes['fatSheep'], [0,0])
 shotHits(board1, [0,5])
 
 
 console.log(board1)
+
+
