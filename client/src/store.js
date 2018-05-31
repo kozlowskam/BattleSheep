@@ -1,7 +1,10 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import ReduxThunk from "redux-thunk";
-
+import socketIO from './socketio';
 import reducers from "./reducers";
+import { storeJwt, socketIo } from './middleware'
+const socket = new socketIO()
+
 const reducer = combineReducers(reducers);
 
 const devTools = window.devToolsExtension ? window.devToolsExtension() : f => f;
