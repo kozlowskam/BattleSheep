@@ -48,7 +48,7 @@ export function createRandomBoard() {
       placeSheep(board, sheepShapes[shape], location);
     }
   });
-  console.log(board);
+  //console.log(board);
   return board;
 }
 
