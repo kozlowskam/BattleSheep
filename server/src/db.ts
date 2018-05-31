@@ -2,6 +2,8 @@ import { createConnection } from "typeorm";
 import { DefaultNamingStrategy } from "typeorm/naming-strategy/DefaultNamingStrategy";
 import { NamingStrategyInterface } from "typeorm/naming-strategy/NamingStrategyInterface";
 import { snakeCase } from "typeorm/util/StringUtils";
+import User from "./users/entity";
+import { Player, Game } from "./games/entities";
 
 class CustomNamingStrategy extends DefaultNamingStrategy
   implements NamingStrategyInterface {
@@ -36,7 +38,7 @@ export default () =>
     url:
       process.env.DATABASE_URL ||
       "postgres://postgres:secret@localhost:5432/postgres",
-    entities: [],
+    entities: [User, Player, Game],
     synchronize: true,
     logging: true,
     namingStrategy: new CustomNamingStrategy()
