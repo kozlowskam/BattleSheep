@@ -3,7 +3,6 @@ import {
   Authorized,
   CurrentUser,
   Post,
-  Put,
   Param,
   BadRequestError,
   HttpCode,
@@ -13,16 +12,32 @@ import {
   Body,
   Patch
 } from "routing-controllers";
-import Game, { Board } from "./entities";
+import User from "../users/entity";
+import { Game, Player, Board } from "./entities";
+import { Validate } from "class-validator";
+import { io } from "../index";
 import { createRandomBoard, placeSheep, sheepShapes, shotHits } from "./logic";
 
 @JsonController()
 export default class GameController {
+  @Authorized()
   @Post("/games")
   @HttpCode(201)
-  async createGame(@Body() game: { board: Board }) {
+  async createGame(@CurrentUser() user: User, @Body() game: { board: Board }) {
     game.board = createRandomBoard();
-    return Game.create(game).save();
+    const entity = await Game.create().save();
+
+    await Player.create({
+      game: entity,
+      user
+    }).save();
+
+    io.emit("action", {
+      type: "ADD_GAME",
+      payload: game
+    });
+
+    return game;
   }
 
   /*@Put("/games/:id")
@@ -45,7 +60,7 @@ export default class GameController {
     return Game.merge(game, update).save();
   }*/
 
-  @Put("/games/:id")
+  /*@Put("/games/:id")
   async updateGame(@Param("id") id: number, @Body() update: { board: Board }) {
     let game = await Game.findOne({ id: id });
     if (!game) throw new NotFoundError("Game not found!");
@@ -55,5 +70,5 @@ export default class GameController {
     Game.merge(game, update);
     game.save();
     return game;
-  }
+  }*/
 }

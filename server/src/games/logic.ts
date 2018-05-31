@@ -73,7 +73,6 @@ export function shotHits(board, shotOnCell) {
   if (cell.occupied === true) {
     console.log("shot hit!");
     return true;
-    console.log("shot hit!");
   } else {
     console.log("shot misses!");
 
