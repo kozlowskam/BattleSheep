@@ -14,7 +14,7 @@ type Status = "pending" | "started" | "finished";
 //import User from "../users/entity";
 export type Board = string[][];
 
-@Entity()
+@Entity("games")
 export class Game extends BaseEntity {
   @PrimaryGeneratedColumn() id?: number;
 
@@ -39,5 +39,5 @@ export class Player extends BaseEntity {
   @ManyToOne(_ => Game, game => game.players)
   game: Game;
 
-  @Column() userId: number;
+  @Column() userId?: number;
 }

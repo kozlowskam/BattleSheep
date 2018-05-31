@@ -3,6 +3,7 @@ import {
   Authorized,
   CurrentUser,
   Post,
+  Put,
   Param,
   BadRequestError,
   HttpCode,
@@ -20,7 +21,6 @@ import { createRandomBoard, placeSheep, sheepShapes, shotHits } from "./logic";
 
 @JsonController()
 export default class GameController {
-  @Authorized()
   @Post("/games")
   @HttpCode(201)
   async createGame(@CurrentUser() user: User, @Body() game: { board: Board }) {
@@ -40,7 +40,15 @@ export default class GameController {
     return game;
   }
 
-  /*@Put("/games/:id")
+  /*@Post("/games")
+  @HttpCode(201)
+  async createGame(@Body() game: { board: Board }) {
+    game.board = createRandomBoard();
+
+    return game;
+  }*/
+
+  /*Put("/games/:"id")
   async updateGame(@Param("id") id: number, @Body() update: { board: Board }) {
     let game = await Game.findOne(id);
     if (!game) throw new NotFoundError("Game not found!");
@@ -52,13 +60,13 @@ export default class GameController {
     return game;
   }*/
 
-  /*@Put("/games/:id")
+  @Put("/games/:id")
   async updateGame(@Param("id") id: number, @Body() update: Partial<Game>) {
     const game = await Game.findOne({ id: id });
     if (!game) throw new NotFoundError("game not found");
     game.board = shotHits(game.board, [0, 2]);
     return Game.merge(game, update).save();
-  }*/
+  }
 
   /*@Put("/games/:id")
   async updateGame(@Param("id") id: number, @Body() update: { board: Board }) {
