@@ -21,7 +21,7 @@ export class Board extends PureComponent {
             occupied: false,
             discovered: false
           });
-          UIBoard.push(<Cell index={[i,j]} />)
+          UIBoard.push(<Cell cellPosition={[i,j]} />)
         }
       }
       return UIBoard
@@ -29,11 +29,9 @@ export class Board extends PureComponent {
  
   render() {
     return (<div>{this.createEmptyBoard()}</div>
-      
     )
   }
 }
-
 
 export default connect(null, createEmptyBoard)(Board);
  
