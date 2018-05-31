@@ -1,4 +1,5 @@
-// TODO:
+
+// TODO: 
 // * make placesheep check if square is already occupied
 // * make shotHits check if a shot was already fired on the square
 

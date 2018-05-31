@@ -5,6 +5,7 @@
   "main": "target/index.js",
   "author": "kozlowskam <malgorzatta.kozlowska@gmail.com>",
   "license": "MIT",
+
   "dependencies": {
     "@types/bcrypt": "^1.0.0",
     "@types/jsonwebtoken": "^7.2.6",
