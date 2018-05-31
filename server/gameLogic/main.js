@@ -50,9 +50,6 @@ function shotHits(board, shotOnCell) {
     // takes the playing board and targeted cell as arguments
     const cell = board[shotOnCell[0]][shotOnCell[1]]
     cell.discovered = true
-
-
-    
     if (cell.occupied === true) {
         console.log('shot hit!')
         return true

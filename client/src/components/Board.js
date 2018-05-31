@@ -1,26 +1,22 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Button from "./Button";
+
 import Cell from "./Cell";
 import "./Board.css";
-import { createEmptyBoard } from "../lib/game";
+import { createRandomBoard } from "../lib/game";
+
+export var testBoard = createRandomBoard()
+// console.log(testBoard)
 
 export class Board extends PureComponent {
 
-  createEmptyBoard() {
+  createUIBoard() {
       var boardsize = 10
-      var board = [];
       var UIBoard = []
       for (var i = 0; i < boardsize; i++) {
-        board.push([]);
         UIBoard.push([<div/>]);
-
         for ( var j = 0; j < boardsize; j++) {
-          board[i].push({
-            occupied: false,
-            discovered: false
-          });
           UIBoard.push(<Cell cellPosition={[i,j]} />)
         }
       }
@@ -28,10 +24,10 @@ export class Board extends PureComponent {
     }
  
   render() {
-    return (<div>{this.createEmptyBoard()}</div>
+    return (<div>{this.createUIBoard()}</div>
     )
   }
 }
 
-export default connect(null, createEmptyBoard)(Board);
+export default connect(null)(Board);
  
