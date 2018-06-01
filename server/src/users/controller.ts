@@ -32,4 +32,10 @@ export default class UserController {
   getUser(@Param("id") id: number) {
     return User.findOneById(id);
   }
+
+  @Authorized()
+  @Get("/users")
+  allUsers() {
+    return User.find();
+  }
 }
