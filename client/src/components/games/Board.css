@@ -1,11 +1,12 @@
+.board-tile {
+  height: 50px;
+  width: 50px;
+}
 .Board {
   flex: 1;
   margin: 30px auto;
+  height: 50px;
+  width: 50px;
   min-width: 10%;
   max-width: 80%;
-}
-
-.Board .row {
-  display: flex;
-  flex-flow: row wrap;
 }
