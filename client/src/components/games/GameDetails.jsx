@@ -18,6 +18,10 @@ class GameDetails extends PureComponent {
 
   joinGame = () => this.props.joinGame(this.props.game.id);
 
+  shotHits(board, shotOnCell) {
+    const { game, updateGame } = this.props;
+  }
+
   render() {
     const { game, users, authenticated, userId } = this.props;
 
@@ -34,9 +38,7 @@ class GameDetails extends PureComponent {
 
         <p>Status: {game.status}</p>
 
-        {game.status === "started" &&
-          player &&
-          player.symbol === game.turn && <div>It's your turn!</div>}
+        {game.status === "started" && player === game.turn}
 
         {game.status === "pending" &&
           game.players.map(p => p.userId).indexOf(userId) === -1 && (
@@ -45,9 +47,7 @@ class GameDetails extends PureComponent {
 
         <hr />
 
-        {game.status !== "pending" && (
-          <Board board={game.board} makeMove={this.makeMove} />
-        )}
+        {game.status !== "pending" && <Board board={game.board} />}
       </Paper>
     );
   }

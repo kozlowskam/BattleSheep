@@ -4,6 +4,7 @@
 }
 .Board {
   flex: 1;
+  display: "inline-block";
   margin: 30px auto;
   height: 50px;
   width: 50px;

@@ -23,6 +23,10 @@ class GameUpdate {
   board: Board;
 }
 
+class BoardUpdate {
+  board: Board;
+}
+
 @JsonController()
 export default class GameController {
   @Authorized()
@@ -80,6 +84,8 @@ export default class GameController {
     @Param("id") gameId: number,
     @Body() update: GameUpdate
   ) {
+    console.log(update, "consolelog update");
+
     const game = await Game.findOneById(gameId);
     if (!game) throw new NotFoundError(`Game does not exist`);
 
@@ -88,6 +94,9 @@ export default class GameController {
     if (!player) throw new ForbiddenError(`You are not part of this game`);
     if (game.status !== "started")
       throw new BadRequestError(`The game is not started yet`);
+
+    game.board = shotHits(game.board, []);
+    Game.merge(game, update);
 
     game.board = update.board;
     await game.save();
@@ -99,6 +108,19 @@ export default class GameController {
 
     return game;
   }
+
+  /*@Put("/games/:id([0-9]+)")
+  async updateBoard(
+    @CurrentUser() user: User,
+    @Param("id") gameId: number,
+    @Body() update: BoardUpdate
+  ) { 
+    const game = await Game.findOneById(gameId);
+    game.board = shotHits(game.board, []);
+    Game.merge(game, update);
+    game.save();
+    return game;
+  }*/
 
   @Authorized()
   @Get("/games/:id([0-9]+)")
@@ -119,15 +141,18 @@ export default class GameController {
     return game;
   }*/
 
-  /*Put("/games/:"id")
-  async updateGame(@Param("id") id: number, @Body() update: { board: Board }) {
+  /*@Put("/games/:id([0-9]+)")
+  async async updateGame(
+    @CurrentUser() user: User,
+    @Param("id") gameId: number,
+    @Body() update: GameUpdate
+  ) { 
     let game = await Game.findOne(id);
-    if (!game) throw new NotFoundError("Game not found!");
-    game.board = shotHits(game.board, [0, 2]);
+    game.board = shotHits(game.board, []);
     Game.merge(game, update);
     game.save();
     return game;
-  }*/
+  }
 
   /* @Put("/games/:id")
   async updateGame(@Param("id") id: number, @Body() update: Partial<Game>) {
